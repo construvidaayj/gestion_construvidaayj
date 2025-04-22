@@ -25,19 +25,16 @@ export default function LoginForm() {
       })
 
       if (!res.ok) {
-        throw new Error('Credenciales inválidas')
+        throw new Error('Usuario y/o contraseña invalidos.')
       }
 
       const data = await res.json()
-
-      // Guardar token y otros datos en localStorage
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('role', data.role)
-      localStorage.setItem('userId', data.id)
-      localStorage.setItem('officeId', data.office_id)
+      console.log("DATA ININCAL NO JOOODA::", data);
+      // Guardar todo el objeto `data` en localStorage como un JSON
+      localStorage.setItem('user', JSON.stringify(data))  // Guardar todo el objeto
 
       // Redirigir al dashboard de clientes
-      router.push('/pages/gestion_clientes')
+      router.push('/select_office')
 
     } catch (err: any) {
       setError(err.message || 'Error al iniciar sesión')

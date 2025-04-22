@@ -1,13 +1,17 @@
+export type PaymentStatus = 'Pagado' | 'Pendiente';
+
 export type DataClient = {
-    fullName: string;
-    identification: string;
-    value: string | null;
-    eps: string | null;
-    arl: string | null;
-    risk: string | null;
-    ccf: string | null;
-    pensionFund: string | null;
-    observation: string | null;
-    paid: 'Pendiente' | 'Pagado';
-    datePaidReceived: string | null;
-  };
+  clientId: string;
+  affiliationId: string;
+  fullName: string;
+  identification: string;
+  value: number;
+  eps: string;
+  arl: string;
+  risk: string;
+  ccf: string;
+  pensionFund: string;
+  paid: PaymentStatus;
+  observation: string;
+  datePaidReceived: string;
+};

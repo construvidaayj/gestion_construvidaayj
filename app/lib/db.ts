@@ -9,7 +9,7 @@ declare global {
 const pool = global.pgPool ?? new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'construvidaayj',
+  database: 'db6',
   password: 'Wiliam021289',
   port: 5432,
 });

@@ -15,10 +15,9 @@ export default function Navbar() {
 
   const handleLogout = () => {
     // Borrar solo los datos relacionados con la sesión del usuario
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('officeId')
+    localStorage.removeItem('user')
+    localStorage.removeItem('selectedOffice')
+    
   
     // Imprimir lo que queda en localStorage
     console.log('Contenido restante en localStorage:')
@@ -29,7 +28,7 @@ export default function Navbar() {
     }
   
     closeMenu()
-    router.push('/pages/login')
+    router.push('/login')
   }
   
 
