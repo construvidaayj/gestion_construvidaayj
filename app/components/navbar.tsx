@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FaBars, FaTimes } from 'react-icons/fa'
+import Image from 'next/image'
 
 export default function Navbar() {
   const router = useRouter()
@@ -88,7 +89,7 @@ export default function Navbar() {
       >
         {/* Logo dentro del menú */}
         <div className="text-center mb-8">
-          <img src="/logo10.png" alt="Logo" width={140} className="mx-auto" />
+          <Image src="/logo10.png" alt="Logo" width={140} className="mx-auto" />
         </div>
 
         {/* Lista de enlaces */}

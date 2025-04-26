@@ -73,7 +73,7 @@ export default function SelectOffice() {
   return (
     <div className="p-10">
       <h1 className="text-3xl font-semibold text-center mb-6">Selecciona una Oficina</h1>
-
+          {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

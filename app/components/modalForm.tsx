@@ -109,10 +109,9 @@ export default function FormModal({ isOpen, onClose, client, refetch }: FormModa
       });
     } finally {
       setLoading(false); // Oculta el estado de carga
-      loadingSwal.close(); // Cierra el mensaje de "Actualizando..."
+      Swal.close();// Cierra el mensaje de "Actualizando..."
     }
   };
-  
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

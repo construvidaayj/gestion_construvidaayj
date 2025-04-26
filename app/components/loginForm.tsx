@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { FiUser, FiLock } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ export default function LoginPage() {
 
       {/* Header con logo */}
       <div className={`w-full ${headerColor} py-8 flex flex-col items-center justify-center relative mb-2`}>
-        <img src={logoUrl} alt="Logo" className="w-60 object-contain" />
+        <Image src={logoUrl} alt="Logo" className="w-60 object-contain" />
         
       </div>
 
