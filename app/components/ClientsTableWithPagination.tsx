@@ -1,7 +1,7 @@
 'use client';
 
 import Swal from "sweetalert2";
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import MonthYearSelector from './monthYearSelector';
 import Table from './table';
 import Pagination from './pagination';
@@ -11,6 +11,7 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { useClientsData } from '../customHooks/useClientDataTable';
 import { DataClient, PaymentStatus } from '../types/dataClient';
 import ModalForm from './modalForm';
+import Loading from "./loading";
 
 // === Helpers ===
 const headers: (keyof DataClient)[] = [
@@ -58,7 +59,7 @@ export default function ClientsTableWithPagination() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  useMemo(() => {
+  useEffect(() => {
     setLocalData(data);
   }, [data]);
 
@@ -189,6 +190,10 @@ export default function ClientsTableWithPagination() {
       refetch();
     }
   };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [columnFilters]);
   
   return (
     <>
@@ -225,7 +230,7 @@ export default function ClientsTableWithPagination() {
         </div>
 
 
-        {isLoading && <p className="text-center mt-6 text-gray-500">Cargando datos...</p>}
+        {isLoading && <Loading label="Cargando datos..."/>}
 
         {!isLoading && error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-xl mx-auto text-center mt-6">
@@ -261,12 +266,12 @@ export default function ClientsTableWithPagination() {
                       );
 
                       try {
-                        const response = await fetch(`/api/affiliations/${item.affiliationId}/paid`, {
-                          method: 'PATCH',
+                        const response = await fetch(`/api/affiliations/paid`, {
+                          method: 'PUT',
                           headers: {
                             'Content-Type': 'application/json',
                           },
-                          body: JSON.stringify({ paid: newPaid }),
+                          body: JSON.stringify({ affiliationId: item.affiliationId, paid: newPaid }),
                         });
 
                         if (!response.ok) {
@@ -298,10 +303,10 @@ export default function ClientsTableWithPagination() {
               rowActions={(item) => (
                 <div className="flex gap-6">
                   <button onClick={() => handleEdit(item)} className="text-blue-500 hover:text-blue-700">
-                    <FiEdit />
+                    <FiEdit size={22} title="Editar"/>
                   </button>
                   <button onClick={() => handleDelete(item)} className="text-red-500 hover:text-red-700">
-                    <FiTrash2 />
+                    <FiTrash2 size={22} title="Eliminar"/>
                   </button>
                 </div>
               )}

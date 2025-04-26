@@ -146,10 +146,10 @@ export async function POST(request: NextRequest) {
         console.log('Afiliaciones copiadas exitosamente.');
         return NextResponse.json({ message: 'Afiliaciones copiadas exitosamente' });
 
-      } catch (error: any) {
+      } catch (error) {
         await client.query('ROLLBACK');
-        console.error('Error al copiar las afiliaciones:', error.message);
-        return NextResponse.json({ message: 'Error al copiar las afiliaciones', error: error.message }, { status: 500 });
+        
+        return NextResponse.json({ message: 'Error al copiar las afiliaciones', error: error }, { status: 500 });
       } finally {
         client.release();
       }
@@ -157,9 +157,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'No se encontraron afiliaciones para copiar' }, { status: 404 });
     }
 
-  } catch (error: any) {
-    console.error('Error al procesar la solicitud:', error.message);
-    console.error('Stack trace:', error.stack);
-    return NextResponse.json({ message: 'Error interno del servidor', error: error.message }, { status: 500 });
+  } catch (error) {
+
+    return NextResponse.json({ message: 'Error interno del servidor', error: error }, { status: 500 });
   }
 }

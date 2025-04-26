@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json();
 
-    console.log(`DATA:::::::::::::::::::::::::::::::: USER ${username}, PASS ${password}`);
     if (!username || !password) {
       return NextResponse.json({ message: 'Faltan campos' }, { status: 400 });
     }

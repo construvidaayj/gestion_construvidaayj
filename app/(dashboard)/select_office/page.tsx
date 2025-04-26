@@ -1,6 +1,9 @@
-"use client"
+'use client'
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
+import Image from 'next/image';
 
 interface Office {
   office_id: string;
@@ -31,6 +34,17 @@ export default function SelectOffice() {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const clientId = user.id;
 
+    // Mostrar loader con SweetAlert2
+    Swal.fire({
+      title: 'Cargando...',
+      text: 'Verificando afiliación',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
     try {
       const response = await fetch('/api/monthly_affiliations', {
         method: 'POST',
@@ -43,13 +57,16 @@ export default function SelectOffice() {
 
       const data = await response.json();
 
+      Swal.close(); // Cerrar loader
+
       if (response.ok) {
         router.push(`/customer_management`);
       } else {
-        setError(data.message || 'Ocurrió un error al verificar la afiliación.');
+        Swal.fire('Error', data.message || 'Ocurrió un error al verificar la afiliación.', 'error');
       }
     } catch (error) {
-      setError('Error en la solicitud de afiliación.');
+      Swal.close();
+      Swal.fire('Error', 'Error en la solicitud de afiliación.', 'error');
     }
   };
 
@@ -66,7 +83,7 @@ export default function SelectOffice() {
             className="flex flex-col items-center p-6 border rounded-lg shadow-md hover:shadow-lg cursor-pointer"
             onClick={() => handleSelectOffice(office.office_id)}
           >
-            <img
+            <Image
               src={office.logo_url}
               alt={office.name}
               className="w-24 h-24 object-contain mb-4"

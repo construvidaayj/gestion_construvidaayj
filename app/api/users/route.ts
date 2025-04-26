@@ -3,8 +3,6 @@ import { pool } from '@/app/lib/db';
 import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';
 
-
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -24,7 +22,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ user: result.rows[0] }, { status: 201 });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }

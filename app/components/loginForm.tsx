@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 import { FiUser, FiLock } from 'react-icons/fi';
-import { FaGoogle, FaXTwitter } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
 
   const headerColor = 'bg-[#ff3366]'; // puedes cambiar este color
   const logoUrl = '/logo2.png'; // cambia por tu logo real

@@ -5,15 +5,33 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FaUser, FaLock } from 'react-icons/fa'
 
+// Componente de carga
+function Loading({ label = "Cargando..." }: { label?: string }) {
+  return (
+    <button
+      type="button"
+      className="w-full py-2 rounded-full bg-indigo-400 text-white font-semibold shadow-md hover:cursor-not-allowed duration-300"
+      disabled
+    >
+      <div className="flex items-center justify-center">
+        <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
+        <span className="ml-2">{label}</span>
+      </div>
+    </button>
+  )
+}
+
 export default function LoginForm() {
   const router = useRouter()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
-    setError('') // Limpiar errores anteriores
+    setError('')
+    setLoading(true)
 
     try {
       const res = await fetch('http://localhost:3000/api/login', {
@@ -25,19 +43,16 @@ export default function LoginForm() {
       })
 
       if (!res.ok) {
-        throw new Error('Usuario y/o contraseña invalidos.')
+        throw new Error('Usuario y/o contraseña inválidos.')
       }
 
       const data = await res.json()
-      console.log("DATA ININCAL NO JOOODA::", data);
-      // Guardar todo el objeto `data` en localStorage como un JSON
-      localStorage.setItem('user', JSON.stringify(data))  // Guardar todo el objeto
-
-      // Redirigir al dashboard de clientes
+      localStorage.setItem('user', JSON.stringify(data))
       router.push('/select_office')
-
     } catch (err: any) {
       setError(err.message || 'Error al iniciar sesión')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -67,6 +82,7 @@ export default function LoginForm() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            disabled={loading}
           />
         </div>
         <div className="relative">
@@ -77,15 +93,21 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            disabled={loading}
           />
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button
-          onClick={handleLogin}
-          className="w-full py-2 rounded-full bg-gradient-to-r from-emerald-400 to-sky-400 text-white font-semibold shadow-md hover:from-emerald-500 hover:to-sky-500 transition"
-        >
-          Iniciar Sesión
-        </button>
+
+        {loading
+          ? <Loading label="Iniciando sesión..." />
+          : (
+            <button
+              onClick={handleLogin}
+              className="w-full py-2 rounded-full bg-gradient-to-r from-emerald-400 to-sky-400 text-white font-semibold shadow-md hover:from-emerald-500 hover:to-sky-500 transition"
+            >
+              Iniciar Sesión
+            </button>
+          )}
       </div>
     </div>
   )

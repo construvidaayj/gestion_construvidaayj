@@ -30,7 +30,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
     return NextResponse.json({ client: result.rows[0] });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }
@@ -71,7 +71,7 @@ export async function PATCH(request: Request, { params }: { params: { id: string
 
     return NextResponse.json({ client: result.rows[0] });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }

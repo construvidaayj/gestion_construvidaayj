@@ -8,10 +8,10 @@ declare global {
 
 const pool = global.pgPool ?? new Pool({
   user: 'postgres',
-  host: 'localhost',
-  database: 'db6',
-  password: 'Wiliam021289',
-  port: 5432,
+  host: 'shinkansen.proxy.rlwy.net',
+  database: 'railway',
+  password: 'MVzEveEWbtmGadKWnBkdwXLVCPORrJcA',
+  port: 17835,
 });
 
 if (process.env.NODE_ENV !== 'production') global.pgPool = pool;
