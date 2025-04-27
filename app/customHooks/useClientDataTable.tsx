@@ -43,7 +43,7 @@ export function useClientsData({ month, year }: Params) {
         userId,
       };
 
-      const res = await fetch('/api/affiliations', {
+      const res = await fetch('https://gestion-construvidaayj.onrender.com/api/affiliations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

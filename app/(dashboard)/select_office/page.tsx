@@ -46,7 +46,7 @@ export default function SelectOffice() {
     });
 
     try {
-      const response = await fetch('/api/monthly_affiliations', {
+      const response = await fetch('https://gestion-construvidaayj.onrender.com/api/monthly_affiliations', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${user.token}`,
