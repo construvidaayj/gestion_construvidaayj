@@ -88,8 +88,8 @@ export default function Navbar() {
         `}
       >
         {/* Logo dentro del menú */}
-        <div className="text-center mb-8">
-          <Image src="/logo10.png" alt="Logo" width={140} className="mx-auto" />
+        <div className="text-center mb-8 bg-danger">
+          <Image src="/logo10.png" alt="Logo" width={140} height={20} className="mx-auto" />
         </div>
 
         {/* Lista de enlaces */}
