@@ -81,7 +81,7 @@ export default function FormModal({ isOpen, onClose, client, refetch }: FormModa
     try {
       setLoading(true); // También puedes usar este estado si deseas cambiar la UI.
   
-      const response = await fetch("http://localhost:3000/api/affilia", {
+      const response = await fetch("https://gestion-construvidaayj.onrender.com/api/affilia", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -1,5 +1,3 @@
-'use client';
-
 import Swal from "sweetalert2";
 import { useState, useMemo, useEffect } from 'react';
 import MonthYearSelector from './monthYearSelector';
@@ -131,7 +129,7 @@ export default function ClientsTableWithPagination() {
           }
 
           // Llamada a la API para eliminar la afiliación (hace la petición DELETE al backend)
-          const response = await fetch(`/api/affiliations`, {
+          const response = await fetch(`https://gestion-construvidaayj.onrender.com/api/affiliations`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
@@ -266,7 +264,7 @@ export default function ClientsTableWithPagination() {
                       );
 
                       try {
-                        const response = await fetch(`/api/affiliations/paid`, {
+                        const response = await fetch(`https://gestion-construvidaayj.onrender.com/api/affiliations/paid`, {
                           method: 'PUT',
                           headers: {
                             'Content-Type': 'application/json',
