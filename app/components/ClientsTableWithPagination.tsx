@@ -1,3 +1,5 @@
+"use cliente";
+
 import Swal from "sweetalert2";
 import { useState, useMemo, useEffect } from 'react';
 import MonthYearSelector from './monthYearSelector';

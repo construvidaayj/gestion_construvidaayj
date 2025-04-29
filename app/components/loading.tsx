@@ -1,3 +1,4 @@
+"use cliente";
 interface LoadingButtonProps {
     label?: string;
 }

@@ -1,5 +1,5 @@
 // /app/(dashboard)/layout.tsx
-
+"use cliente";
 import { ReactNode } from 'react';
 import Navbar from '../components/navbar';
   // Asegúrate de que la ruta sea correcta

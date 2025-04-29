@@ -1,3 +1,4 @@
+"use cliente";
 import React from 'react';
 import { TableProps } from '../interfaces/tableProps';
 
